@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="FakeStoreAPI-Users-TestSuite" verbose="1">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+    </listeners>
+
+    <test name="Users-API-Tests" preserve-order="true">
+        <classes>
+            <class name="com.emmanuelarhu.tests.UsersApiTest"/>
+        </classes>
+    </test>
+
+    <!-- Smoke Test Suite - Quick validation -->
+    <test name="Smoke-Tests" preserve-order="true">
+        <classes>
+            <class name="com.emmanuelarhu.tests.UsersApiTest">
+                <methods>
+                    <include name="testGetAllUsers"/>
+                    <include name="testGetSingleUserByValidId"/>
+                    <include name="testCreateUserWithValidData"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Regression Test Suite - All tests -->
+    <test name="Regression-Tests" preserve-order="true">
+        <classes>
+            <class name="com.emmanuelarhu.tests.UsersApiTest"/>
+        </classes>
+    </test>
+</suite>
