@@ -38,7 +38,7 @@ public class UsersApiTest extends BaseTest {
                 .body("[0]", hasKey("email"))
                 .body("[0].id", notNullValue())
                 .body("[0].username", notNullValue())
-                .body("[0].email", notNullValue());
+                .body("[0].email", notNullValue()).log().all();
     }
 
     @Test(priority = 2)
@@ -52,7 +52,7 @@ public class UsersApiTest extends BaseTest {
                 .get(USERS_ENDPOINT)
                 .then()
                 .statusCode(200)
-                .time(lessThan(5000L)); // Response should be under 5 seconds
+                .time(lessThan(5000L)).log().all(); // Response should be under 5 seconds
     }
 
     // GET /users/{id} tests
@@ -72,7 +72,7 @@ public class UsersApiTest extends BaseTest {
                 .body("id", equalTo(userId))
                 .body("username", notNullValue())
                 .body("email", notNullValue())
-                .body("email", matchesPattern("^[A-Za-z0-9+_.-]+@(.+)$"));
+                .body("email", matchesPattern("^[A-Za-z0-9+_.-]+@(.+)$")).log().all();
     }
 
     @Test(priority = 4, dataProvider = "invalidUserIds", dataProviderClass = TestDataProvider.class)
@@ -86,7 +86,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .get(USERS_ENDPOINT + "/{id}")
                 .then()
-                .statusCode(anyOf(equalTo(400), equalTo(404)));
+                .statusCode(anyOf(equalTo(400), equalTo(404))).log().all();
     }
 
     @Test(priority = 5)
@@ -99,7 +99,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .get(USERS_ENDPOINT + "/abc")
                 .then()
-                .statusCode(anyOf(equalTo(400), equalTo(404)));
+                .statusCode(anyOf(equalTo(400), equalTo(404))).log().all();
     }
 
     @Test(priority = 6)
@@ -112,7 +112,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .get(USERS_ENDPOINT + "/@#$")
                 .then()
-                .statusCode(anyOf(equalTo(400), equalTo(404)));
+                .statusCode(anyOf(equalTo(400), equalTo(404))).log().all();
     }
 
     // POST /users tests
@@ -130,7 +130,7 @@ public class UsersApiTest extends BaseTest {
                 .statusCode(anyOf(equalTo(200), equalTo(201)))
                 .contentType("application/json")
                 .body("username", equalTo(user.getUsername()))
-                .body("email", equalTo(user.getEmail()))
+                .body("email", equalTo(user.getEmail())).log().all()
                 .extract().response();
 
         // Verify the created user has an ID
@@ -149,7 +149,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .post(USERS_ENDPOINT)
                 .then()
-                .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(200))); // Some APIs might still return 200
+                .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(200))).log().all(); // Some APIs might still return 200
     }
 
     @Test(priority = 9)
@@ -163,7 +163,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .post(USERS_ENDPOINT)
                 .then()
-                .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(200)));
+                .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(200))).log().all();
     }
 
     @Test(priority = 10)
@@ -177,7 +177,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .post(USERS_ENDPOINT)
                 .then()
-                .statusCode(anyOf(equalTo(400), equalTo(422)));
+                .statusCode(anyOf(equalTo(400), equalTo(422))).log().all();
     }
 
     // PUT /users/{id} tests
@@ -193,7 +193,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .put(USERS_ENDPOINT + "/{id}")
                 .then()
-                .statusCode(anyOf(equalTo(200), equalTo(204)))
+                .statusCode(anyOf(equalTo(200), equalTo(204))).log().all()
                 .contentType(anyOf(equalTo("application/json"), equalTo("application/json; charset=utf-8")));
     }
 
@@ -211,7 +211,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .put(USERS_ENDPOINT + "/{id}")
                 .then()
-                .statusCode(anyOf(equalTo(404), equalTo(400), equalTo(200))); // Some APIs might still return 200
+                .statusCode(anyOf(equalTo(404), equalTo(400), equalTo(200))).log().all(); // Some APIs might still return 200
     }
 
     @Test(priority = 13)
@@ -228,7 +228,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .put(USERS_ENDPOINT + "/{id}")
                 .then()
-                .statusCode(anyOf(equalTo(400), equalTo(404)));
+                .statusCode(anyOf(equalTo(400), equalTo(404))).log().all();
     }
 
     @Test(priority = 14)
@@ -245,7 +245,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .put(USERS_ENDPOINT + "/{id}")
                 .then()
-                .statusCode(anyOf(equalTo(200), equalTo(204), equalTo(400)));
+                .statusCode(anyOf(equalTo(200), equalTo(204), equalTo(400))).log().all();
     }
 
     // DELETE /users/{id} tests
@@ -260,7 +260,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .delete(USERS_ENDPOINT + "/{id}")
                 .then()
-                .statusCode(anyOf(equalTo(200), equalTo(204)));
+                .statusCode(anyOf(equalTo(200), equalTo(204))).log().all();
     }
 
     @Test(priority = 16)
@@ -274,7 +274,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .delete(USERS_ENDPOINT + "/{id}")
                 .then()
-                .statusCode(anyOf(equalTo(404), equalTo(400), equalTo(200))); // Some APIs might still return 200
+                .statusCode(anyOf(equalTo(404), equalTo(400), equalTo(200))).log().all(); // Some APIs might still return 200
     }
 
     @Test(priority = 17)
@@ -288,7 +288,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .delete(USERS_ENDPOINT + "/{id}")
                 .then()
-                .statusCode(anyOf(equalTo(400), equalTo(404)));
+                .statusCode(anyOf(equalTo(400), equalTo(404))).log().all();
     }
 
     @Test(priority = 18)
@@ -302,7 +302,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .delete(USERS_ENDPOINT + "/{id}")
                 .then()
-                .statusCode(anyOf(equalTo(400), equalTo(404)));
+                .statusCode(anyOf(equalTo(400), equalTo(404))).log().all();
     }
 
     // Edge cases and security tests
@@ -316,7 +316,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .get(USERS_ENDPOINT + "/1' OR '1'='1")
                 .then()
-                .statusCode(anyOf(equalTo(400), equalTo(404)));
+                .statusCode(anyOf(equalTo(400), equalTo(404))).log().all();
     }
 
     @Test(priority = 20)
@@ -332,7 +332,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .post(USERS_ENDPOINT)
                 .then()
-                .statusCode(anyOf(equalTo(400), equalTo(404)));
+                .statusCode(anyOf(equalTo(400), equalTo(404))).log().all();
     }
 
     @Test(priority = 21)
@@ -347,7 +347,7 @@ public class UsersApiTest extends BaseTest {
                     .when()
                     .get(USERS_ENDPOINT)
                     .then()
-                    .statusCode(200)
+                    .statusCode(200).log().all()
                     .time(lessThan(10000L));
         }
     }
@@ -367,7 +367,7 @@ public class UsersApiTest extends BaseTest {
                     .when()
                     .post(USERS_ENDPOINT)
                     .then()
-                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(200))); // Some APIs might accept invalid emails
+                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(200))).log().all(); // Some APIs might accept invalid emails
         }
     }
 }
