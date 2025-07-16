@@ -1,7 +1,5 @@
 
 name: 🧪 FakeStore API Tests & Reports
-author: Emmanuel Arhu
-description: Fake STore API tests and reports using GitHub Actions
 on:
   push:
     branches: [ main, tester ]
