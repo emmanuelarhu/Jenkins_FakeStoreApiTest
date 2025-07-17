@@ -149,7 +149,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .post(USERS_ENDPOINT)
                 .then()
-                .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(200))).log().all(); // Some APIs might still return 200
+                .statusCode(anyOf(equalTo(400), equalTo(404))).log().all(); // Some APIs might still return 200
     }
 
     @Test(priority = 9)
@@ -163,7 +163,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .post(USERS_ENDPOINT)
                 .then()
-                .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(200))).log().all();
+                .statusCode(anyOf(equalTo(400), equalTo(404))).log().all();
     }
 
     @Test(priority = 10)
@@ -177,7 +177,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .post(USERS_ENDPOINT)
                 .then()
-                .statusCode(anyOf(equalTo(400), equalTo(422))).log().all();
+                .statusCode(anyOf(equalTo(400), equalTo(404))).log().all();
     }
 
     // PUT /users/{id} tests
@@ -193,7 +193,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .put(USERS_ENDPOINT + "/{id}")
                 .then()
-                .statusCode(anyOf(equalTo(200), equalTo(204))).log().all()
+                .statusCode(anyOf(equalTo(200), equalTo(201))).log().all()
                 .contentType(anyOf(equalTo("application/json"), equalTo("application/json; charset=utf-8")));
     }
 
@@ -211,7 +211,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .put(USERS_ENDPOINT + "/{id}")
                 .then()
-                .statusCode(anyOf(equalTo(404), equalTo(400), equalTo(200))).log().all(); // Some APIs might still return 200
+                .statusCode(anyOf(equalTo(404), equalTo(400))).log().all(); // Some APIs might still return 200
     }
 
     @Test(priority = 13)
@@ -245,7 +245,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .put(USERS_ENDPOINT + "/{id}")
                 .then()
-                .statusCode(anyOf(equalTo(200), equalTo(204), equalTo(400))).log().all();
+                .statusCode(anyOf(equalTo(200), equalTo(204))).log().all();
     }
 
     // DELETE /users/{id} tests
@@ -260,7 +260,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .delete(USERS_ENDPOINT + "/{id}")
                 .then()
-                .statusCode(anyOf(equalTo(200), equalTo(204))).log().all();
+                .statusCode(anyOf(equalTo(200), equalTo(201))).log().all();
     }
 
     @Test(priority = 16)
@@ -274,7 +274,7 @@ public class UsersApiTest extends BaseTest {
                 .when()
                 .delete(USERS_ENDPOINT + "/{id}")
                 .then()
-                .statusCode(anyOf(equalTo(404), equalTo(400), equalTo(200))).log().all(); // Some APIs might still return 200
+                .statusCode(anyOf(equalTo(404), equalTo(400))).log().all(); // Some APIs might still return 200
     }
 
     @Test(priority = 17)
