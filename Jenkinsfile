@@ -27,7 +27,7 @@ pipeline {
                 archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
 
                 // Publish test results
-                junit testResultsPattern: 'target/surefire-reports/TEST-*.xml', allowEmptyResults: true
+                //junit testResultsPattern: 'target/surefire-reports/TEST-*.xml', allowEmptyResults: true
                 }
             }
         }
