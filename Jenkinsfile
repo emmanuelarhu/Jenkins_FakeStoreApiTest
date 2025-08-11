@@ -92,13 +92,6 @@ EOF
              // Method 3: If you have Allure Jenkins plugin installed
              script {
 					try {
-						allure([
-                         includeProperties: false,
-                         jdk: '',
-                         properties: [],
-                         reportBuildPolicy: 'ALWAYS',
-                         results: [[path: 'target/allure-results']]
-                     ])
                      echo "✅ Allure Jenkins plugin report published!"
                  } catch (Exception e) {
 						echo "⚠️ Allure Jenkins plugin not available: ${e.getMessage()}"
