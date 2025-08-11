@@ -19,115 +19,164 @@ pipeline {
         stage('Test') {
 			steps {
 				echo '🧪 Running API tests...'
-                sh '/usr/share/maven/bin/mvn test'
+                sh 'mvn test'
             }
             post {
 				always {
 					// Archive test results
-                archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
+                    archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
 
-                // Publish test results
-                //junit testResultsPattern: 'target/surefire-reports/TEST-*.xml', allowEmptyResults: true
+                    // Publish TestNG results
+                    //publishTestResults testResultsPattern: 'target/surefire-reports/TEST-*.xml'
                 }
             }
         }
 
-        stage('Generate Reports') {
+        stage('Generate Allure Report') {
 			steps {
 				echo '📊 Generating Allure reports...'
                 script {
 					try {
-						// Generate Allure report (creates static HTML files)
-                   sh 'mvn allure:report'
+						// First, ensure allure-results directory exists and has content
+                        sh '''
+                            echo "Checking allure-results directory..."
+                            ls -la target/allure-results/ || echo "No allure-results directory found"
+                            if [ -d "target/allure-results" ]; then
+                                echo "Allure results files:"
+                                find target/allure-results -type f -name "*.json" | head -10
+                            fi
+                        '''
 
-                   echo "✅ Allure report generated successfully!"
-                   echo "📁 Report location: target/site/allure-maven-plugin/"
+                        // Generate Allure report using the Allure tool (not Maven plugin)
+                        sh '''
+                            # Install Allure if not present
+                            if ! command -v allure &> /dev/null; then
+                                echo "Installing Allure..."
+                                curl -o allure-2.24.0.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.24.0/allure-commandline-2.24.0.tgz
+                                tar -zxvf allure-2.24.0.tgz -C /opt/
+                                ln -s /opt/allure-2.24.0/bin/allure /usr/bin/allure
+                            fi
 
-                   // List generated files for debugging
-                   sh 'ls -la target/site/allure-maven-plugin/ || echo "No allure report directory found"'
+                            # Generate the report
+                            mkdir -p target/allure-report
+                            allure generate target/allure-results --output target/allure-report --clean
+                        '''
 
-                } catch (Exception e) {
+                        echo "✅ Allure report generated successfully!"
+
+                        // Verify report was generated
+                        sh '''
+                            echo "Generated report contents:"
+                            ls -la target/allure-report/
+                            echo "Checking for index.html:"
+                            ls -la target/allure-report/index.html || echo "index.html not found"
+                        '''
+
+                    } catch (Exception e) {
 						echo "⚠️ Allure report generation failed: ${e.getMessage()}"
 
-                   // Create a basic HTML report as fallback
-                   sh '''
-                       mkdir -p target/site/allure-maven-plugin
-                       cat > target/site/allure-maven-plugin/index.html << 'EOF'
+                        // Create a fallback HTML report
+                        sh '''
+                            mkdir -p target/allure-report
+                            cat > target/allure-report/index.html << 'EOF'
 <!DOCTYPE html>
 <html>
-<head><title>FakeStore API Test Results</title></head>
+<head>
+    <title>FakeStore API Test Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .header { background: #f4f4f4; padding: 20px; border-radius: 5px; }
+        .content { margin: 20px 0; }
+        .status { padding: 10px; border-radius: 3px; margin: 10px 0; }
+        .error { background: #ffe6e6; border-left: 4px solid #ff0000; }
+    </style>
+</head>
 <body>
-    <h1>🧪 FakeStore API Test Results</h1>
-    <p>Build: ${BUILD_NUMBER}</p>
-    <p>Date: $(date)</p>
-    <p>Allure report generation failed, but tests were executed.</p>
-    <p><a href="../../../testReport/">View TestNG Results</a></p>
+    <div class="header">
+        <h1>🧪 FakeStore API Test Results</h1>
+        <p><strong>Build:</strong> ${BUILD_NUMBER}</p>
+        <p><strong>Date:</strong> $(date)</p>
+    </div>
+
+    <div class="content">
+        <div class="status error">
+            <h3>⚠️ Allure Report Generation Failed</h3>
+            <p>The Allure report could not be generated, but tests were executed successfully.</p>
+        </div>
+
+        <h3>📊 Available Reports:</h3>
+        <ul>
+            <li><a href="../../testReport/" target="_blank">TestNG/Surefire Results</a></li>
+            <li><a href="../../artifact/" target="_blank">Build Artifacts</a></li>
+        </ul>
+    </div>
 </body>
 </html>
 EOF
-                   '''
+                        '''
+                    }
                 }
             }
-          }
         }
 
         stage('Publish Reports') {
 			steps {
 				echo '📊 Publishing reports to Jenkins...'
 
-             // Method 1: Publish HTML reports in Jenkins (Recommended)
-             publishHTML([
-                 allowMissing: false,
-                 alwaysLinkToLastBuild: true,
-                 keepAll: true,
-                 reportDir: 'target/site/allure-maven-plugin',
-                 reportFiles: 'index.html',
-                 reportName: 'Allure Report',
-                 reportTitles: 'FakeStore API Test Results'
-             ])
+                // Publish HTML reports
+                publishHTML([
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'target/allure-report',
+                    reportFiles: 'index.html',
+                    reportName: 'Allure Report',
+                    reportTitles: 'FakeStore API Test Results'
+                ])
 
-             // Method 2: Archive all report files for download
-             archiveArtifacts artifacts: 'target/site/allure-maven-plugin/**/*', allowEmptyArchive: true
+                // Archive report files
+                archiveArtifacts artifacts: 'target/allure-report/**/*', allowEmptyArchive: true
 
-             // Method 3: If you have Allure Jenkins plugin installed
-             script {
+                // Try to use Allure Jenkins plugin if available
+                script {
 					try {
 						allure([
-                         includeProperties: false,
-                         jdk: '',
-                         properties: [],
-                         reportBuildPolicy: 'ALWAYS',
-                         results: [[path: 'target/allure-results']]
-                     ])
-                     echo "✅ Allure Jenkins plugin report published!"
-                 } catch (Exception e) {
+                            includeProperties: false,
+                            jdk: '',
+                            properties: [],
+                            reportBuildPolicy: 'ALWAYS',
+                            results: [[path: 'target/allure-results']]
+                        ])
+                        echo "✅ Allure Jenkins plugin report published!"
+                    } catch (Exception e) {
 						echo "⚠️ Allure Jenkins plugin not available: ${e.getMessage()}"
-                 }
-             }
+                        echo "💡 Install Allure Jenkins plugin for better integration"
+                    }
+                }
 
-             echo "📊 Report URLs:"
-             echo "  🔗 HTML Report: ${BUILD_URL}Allure_Report/"
-             echo "  🔗 Test Results: ${BUILD_URL}testReport/"
-             echo "  🔗 Build Artifacts: ${BUILD_URL}artifact/"
-          }
+                echo "📊 Report URLs:"
+                echo "  🔗 HTML Report: ${BUILD_URL}Allure_20Report/"
+                echo "  🔗 Test Results: ${BUILD_URL}testReport/"
+                echo "  🔗 Artifacts: ${BUILD_URL}artifact/target/allure-report/"
+            }
         }
     }
 
     post {
 		always {
-			echo '🧹 Cleaning up workspace...'
-          // Don't clean workspace immediately so reports remain accessible
-          // cleanWs()
+			echo '🧹 Pipeline completed'
+            // Archive allure results for debugging
+            archiveArtifacts artifacts: 'target/allure-results/**/*', allowEmptyArchive: true
         }
 
         success {
 			echo '✅ Pipeline completed successfully!'
-          echo "📊 View reports at: ${BUILD_URL}Allure_Report/"
+            echo "📊 View reports at: ${BUILD_URL}Allure_20Report/"
         }
 
         failure {
 			echo '❌ Pipeline failed!'
-          echo "📊 Check results at: ${BUILD_URL}testReport/"
+            echo "📊 Check results at: ${BUILD_URL}testReport/"
         }
     }
 }
