@@ -19,7 +19,7 @@ pipeline {
         stage('Test') {
 			steps {
 				echo '🧪 Running API tests...'
-                sh 'mvn test'
+                sh '/usr/share/maven/bin/mvn test'
             }
             post {
 				always {
@@ -27,7 +27,7 @@ pipeline {
                 archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
 
                 // Publish test results
-                publishTestResults testResultsPattern: 'target/surefire-reports/TEST-*.xml', allowEmptyResults: true
+                junit testResultsPattern: 'target/surefire-reports/TEST-*.xml', allowEmptyResults: true
                 }
             }
         }
