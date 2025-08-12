@@ -52,7 +52,7 @@ pipeline {
                     jdk: '',
                     properties: [],
                     reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'target/allure-results']]
+                    results: [[path: 'target/allure-report']]
             ])
     }
     }
@@ -69,7 +69,6 @@ pipeline {
                 reportBuildPolicy: 'ALWAYS',
                 results: [[path: 'target/allure-results']]
             ])
-
 
             echo '✅ Pipeline completed'
             echo "📊 View Allure Report: ${BUILD_URL}allure/"
