@@ -5,6 +5,7 @@ import com.emmanuelarhu.models.User;
 import com.emmanuelarhu.utils.TestDataProvider;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 
@@ -19,6 +20,7 @@ import static org.testng.Assert.*;
  */
 @Epic("FakeStore API Testing")
 @Feature("Users Management")
+@Listeners({io.qameta.allure.testng.AllureTestNg.class})
 public class UsersApiTest extends BaseTest {
 
     // GET /users tests
