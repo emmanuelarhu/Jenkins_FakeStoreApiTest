@@ -94,7 +94,7 @@ pipeline {
 <body>
     <div class="header">
         <h1>🧪 FakeStore API Test Results</h1>
-        <p><strong>Build:</strong> ${BUILD_NUMBER}</p>
+        <p><strong>Build:</strong> ${env.BUILD_NUMBER}</p>
         <p><strong>Date:</strong> $(date)</p>
     </div>
 
@@ -128,14 +128,14 @@ EOF
                     allowMissing: false,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
-                    reportDir: 'target/allure-report',
+                    reportDir: 'target/allure-results',
                     reportFiles: 'index.html',
                     reportName: 'Allure Report',
                     reportTitles: 'FakeStore API Test Results'
                 ])
 
                 // Archive report files
-                archiveArtifacts artifacts: 'target/allure-report/**/*', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'target/allure-results/**/*', allowEmptyArchive: true
 
                 // Try to use Allure Jenkins plugin if available
                 script {
@@ -155,9 +155,9 @@ EOF
                 }
 
                 echo "📊 Report URLs:"
-                echo "  🔗 HTML Report: ${BUILD_URL}Allure_20Report/"
-                echo "  🔗 Test Results: ${BUILD_URL}testReport/"
-                echo "  🔗 Artifacts: ${BUILD_URL}artifact/target/allure-report/"
+                echo "  🔗 HTML Report: ${env.BUILD_URL}Allure_20Report/"
+                echo "  🔗 Test Results: ${env.BUILD_URL}testReport/"
+                echo "  🔗 Artifacts: ${env.BUILD_URL}artifact/target/allure-results/"
             }
         }
     }
@@ -171,12 +171,12 @@ EOF
 
         success {
 			echo '✅ Pipeline completed successfully!'
-            echo "📊 View reports at: ${BUILD_URL}Allure_20Report/"
+            echo "📊 View reports at: ${env.BUILD_URL}Allure_20Report/"
         }
 
         failure {
 			echo '❌ Pipeline failed!'
-            echo "📊 Check results at: ${BUILD_URL}testReport/"
+            echo "📊 Check results at: ${env.BUILD_URL}testReport/"
         }
     }
 }
