@@ -44,22 +44,38 @@ pipeline {
             }
         }
 
-    post {
+    //post {
+	//	always {
+	//		echo '🧹 Pipeline completed'
+    //        // Archive allure results for debugging
+    //        archiveArtifacts artifacts: 'target/allure-results/**/*', allowEmptyArchive: true
+    //    }
+	//
+    //    success {
+	//		echo '✅ Pipeline completed successfully!'
+    //        echo "📊 View reports at: ${env.BUILD_URL}Allure_20Report/"
+    //    }
+	//
+    //    failure {
+	//		echo '❌ Pipeline failed!'
+    //        echo "📊 Check results at: ${env.BUILD_URL}testReport/"
+    //    }
+    //}
+	}
+	}
+
+	// Optional: Post actions for the pipeline
+	post {
 		always {
-			echo '🧹 Pipeline completed'
-            // Archive allure results for debugging
-            archiveArtifacts artifacts: 'target/allure-results/**/*', allowEmptyArchive: true
-        }
-
-        success {
+			echo '🧹 Cleaning up...'
+			cleanWs()
+		}
+		success {
 			echo '✅ Pipeline completed successfully!'
-            echo "📊 View reports at: ${env.BUILD_URL}Allure_20Report/"
-        }
-
-        failure {
+			echo "📊 View reports at: ${env.BUILD_URL}Allure_20Report/"
+		}
+		failure {
 			echo '❌ Pipeline failed!'
-            echo "📊 Check results at: ${env.BUILD_URL}testReport/"
-        }
-    }
-}
-}
+			echo "📊 Check results at: ${env.BUILD_URL}testReport/"
+		}
+	}
