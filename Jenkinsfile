@@ -1,11 +1,6 @@
 pipeline {
 	agent any
 
-    tools {
-		// This tells Jenkins to use the Allure tool we configured
-        allure 'Allure'
-    }
-
     stages {
 		stage('Checkout') {
 			steps {
@@ -28,8 +23,23 @@ pipeline {
             }
             post {
 				always {
-					archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
-                    publishTestResults testResultsPattern: 'target/surefire-reports/TEST-*.xml'
+					// Archive test results
+                    archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
+
+                    // Publish TestNG results
+                    //publishTestResults testResultsPattern: 'target/surefire-reports/TEST-*.xml'
+
+                    // Check what was generated
+                    script {
+						sh '''
+                            echo "=== What got generated ==="
+                            echo "Allure results:"
+                            ls -la target/allure-results/ || echo "No allure-results"
+
+                            echo "Number of allure result files:"
+                            find target/allure-results -name "*.json" 2>/dev/null | wc -l || echo "0"
+                        '''
+                    }
                 }
             }
         }
@@ -37,7 +47,8 @@ pipeline {
 
     post {
 		always {
-			allure([
+			// ONLY use the Jenkins Allure plugin - no manual installation
+            allure([
                 includeProperties: false,
                 jdk: '',
                 properties: [],
@@ -45,7 +56,17 @@ pipeline {
                 results: [[path: 'target/allure-results']]
             ])
 
+            echo '✅ Pipeline completed'
             echo "📊 View Allure Report: ${BUILD_URL}allure/"
+            echo "📈 View Test Results: ${BUILD_URL}testReport/"
+        }
+
+        success {
+			echo '🎉 Tests passed! Check the Allure report'
+        }
+
+        failure {
+			echo '❌ Tests failed - check reports for details'
         }
     }
 }
