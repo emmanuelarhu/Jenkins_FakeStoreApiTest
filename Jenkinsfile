@@ -25,10 +25,14 @@ pipeline {
 				always {
 					// Archive test results
                     archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
-
-                    // Publish TestNG results
-                    //publishTestResults testResultsPattern: 'target/surefire-reports/TEST-*.xml'
                 }
+            }
+        }
+
+        stage('Build') {
+			steps {
+				echo 'Gene...'
+                sh 'mvn clean compile test-compile'
             }
         }
 
@@ -43,23 +47,8 @@ pipeline {
                             ls -la target/allure-results/ || echo "No allure-results directory found"
                             if [ -d "target/allure-results" ]; then
                                 echo "Allure results files:"
-                                find target/allure-results -type f -name "*.json" | head -10
+                                allure generate target/allure-results --output target/allure-report --clean
                             fi
-                        '''
-
-                        // Generate Allure report using the Allure tool (not Maven plugin)
-                        sh '''
-                            # Install Allure if not present
-                            if ! command -v allure &> /dev/null; then
-                                echo "Installing Allure..."
-                                curl -o allure-2.24.0.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.24.0/allure-commandline-2.24.0.tgz
-                                tar -zxvf allure-2.24.0.tgz -C /opt/
-                                ln -s /opt/allure-2.24.0/bin/allure /usr/bin/allure
-                            fi
-
-                            # Generate the report
-                            mkdir -p target/allure-report
-                            allure generate target/allure-results --output target/allure-report --clean
                         '''
 
                         echo "✅ Allure report generated successfully!"
@@ -136,23 +125,6 @@ EOF
 
                 // Archive report files
                 archiveArtifacts artifacts: 'target/allure-report/**/*', allowEmptyArchive: true
-
-                // Try to use Allure Jenkins plugin if available
-                //script {
-				//	try {
-				//		allure([
-                //            includeProperties: false,
-                //            jdk: '',
-                //            properties: [],
-                //            reportBuildPolicy: 'ALWAYS',
-                //            results: [[path: 'target/allure-results']]
-                //        ])
-                //        echo "✅ Allure Jenkins plugin report published!"
-                //    } catch (Exception e) {
-				//		echo "⚠️ Allure Jenkins plugin not available: ${e.getMessage()}"
-                //        echo "💡 Install Allure Jenkins plugin for better integration"
-                //    }
-                //}
 
                 echo "📊 Report URLs:"
                 echo "  🔗 HTML Report: ${env.BUILD_URL}Allure_20Report/"
