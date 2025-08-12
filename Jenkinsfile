@@ -144,7 +144,7 @@ pipeline {
         }
 
         success {
-			echo '🎉 All tests completed successfully!'
+			echo '🎉 All tests completed successfully! '
             echo "✅ Allure report is served from target/allure-results"
         }
 
