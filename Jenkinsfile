@@ -28,7 +28,7 @@ pipeline {
                     archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
 
                     // Publish TestNG results
-                    //publishTestResults testResultsPattern: 'target/surefire-reports/TEST-*.xml'
+                    publishTestResults testResultsPattern: 'target/surefire-reports/TEST-*.xml'
 
                     // Check what was generated
                     script {
