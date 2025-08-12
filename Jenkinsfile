@@ -29,7 +29,6 @@ pipeline {
             post {
 				always {
 					archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
-                    publishTestResults testResultsPattern: 'target/surefire-reports/TEST-*.xml'
 
                     script {
 						sh '''
