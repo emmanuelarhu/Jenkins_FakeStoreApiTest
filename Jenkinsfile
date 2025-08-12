@@ -43,6 +43,20 @@ pipeline {
                 }
             }
         }
+
+        stage('Allure reports') {
+			steps {
+				script {
+					allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'target/allure-results']]
+            ])
+    }
+    }
+}
     }
 
     post {
@@ -55,6 +69,7 @@ pipeline {
                 reportBuildPolicy: 'ALWAYS',
                 results: [[path: 'target/allure-results']]
             ])
+
 
             echo '✅ Pipeline completed'
             echo "📊 View Allure Report: ${BUILD_URL}allure/"
