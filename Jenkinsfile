@@ -29,13 +29,6 @@ pipeline {
             }
         }
 
-        stage('Build') {
-			steps {
-				echo 'Gene...'
-                sh 'mvn clean compile test-compile'
-            }
-        }
-
         stage('Generate Allure Report') {
 			steps {
 				echo '📊 Generating Allure reports...'
