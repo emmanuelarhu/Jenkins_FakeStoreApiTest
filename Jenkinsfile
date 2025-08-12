@@ -1,11 +1,6 @@
 pipeline {
 	agent any
 
-    tools {
-		maven 'Maven 3.8.5'  // if using Maven
-        // or skip if you use Gradle
-    }
-
     stages {
 		stage('Checkout') {
 			steps {
