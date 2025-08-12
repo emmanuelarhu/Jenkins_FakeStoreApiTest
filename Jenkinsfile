@@ -28,9 +28,6 @@ pipeline {
 
                     // Publish TestNG results
                     //publishTestResults testResultsPattern: 'target/surefire-reports/TEST-*.xml'
-
-					allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
-
                 }
             }
         }
