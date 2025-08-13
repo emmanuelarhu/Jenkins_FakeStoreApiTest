@@ -1,5 +1,7 @@
 pipeline {
-	agent any
+	agent {
+		label 'linux-agent'
+	}
 
     tools {
 		// This must match the name you set in Global Tool Configuration
