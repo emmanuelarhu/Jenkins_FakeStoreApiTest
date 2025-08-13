@@ -54,21 +54,32 @@ pipeline {
                 ])
             }
         }
+
     }
 
-    post {
-		always {
-			echo '✅ Pipeline completed'
-            echo "📊 View Allure Report: ${BUILD_URL}allure/"
-            echo "📈 View Test Results: ${BUILD_URL}testReport/"
-        }
-
-        success {
-			echo '🎉 All tests passed!'
-        }
-
-        failure {
-			echo '❌ Pipeline failed - check reports'
-        }
+	post {
+		success {
+			slackSend(
+            color: 'good',
+            message: ":white_check_mark: *SUCCESS* - `${env.JOB_NAME} #${env.BUILD_NUMBER}`\n" +
+                     "See details: ${env.BUILD_URL}\n" +
+                     "Allure Report: ${env.BUILD_URL}allure"
+        )
+    }
+    failure {
+			slackSend(
+            color: 'danger',
+            message: ":x: *FAILED* - `${env.JOB_NAME} #${env.BUILD_NUMBER}`\n" +
+                     "See details: ${env.BUILD_URL}\n" +
+                     "Please check logs immediately."
+        )
+    }
+    unstable {
+			slackSend(
+            color: 'warning',
+            message: ":warning: *UNSTABLE* - `${env.JOB_NAME} #${env.BUILD_NUMBER}`\n" +
+                     "Some tests failed. See: ${env.BUILD_URL}"
+        )
     }
 }
+	}
