@@ -78,7 +78,8 @@ pipeline {
 			slackSend(
             color: 'warning',
             message: ":warning: *UNSTABLE* - `${env.JOB_NAME} #${env.BUILD_NUMBER}`\n" +
-                     "Some tests failed. See: ${env.BUILD_URL}"
+                     "Some tests failed. See: `${env.BUILD_URL}`\n" +
+                     "See Allure Report Here 👉: ${env.BUILD_URL}allure"
         )
     }
 }
