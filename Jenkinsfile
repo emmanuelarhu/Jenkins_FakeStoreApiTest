@@ -21,7 +21,7 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Test API') {
 			steps {
 				echo '🧪 Running API tests...'
                 sh 'mvn clean test'
