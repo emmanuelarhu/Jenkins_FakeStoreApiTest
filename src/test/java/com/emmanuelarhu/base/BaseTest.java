@@ -16,6 +16,9 @@ public class BaseTest {
 
     protected static final String BASE_URL = "https://fakestoreapi.com";
     protected static final String USERS_ENDPOINT = "/users";
+    protected static final String PRODUCTS_ENDPOINT = "/products";
+    protected static final String CARTS_ENDPOINT = "/carts";
+    protected static final String AUTH_ENDPOINT = "/auth/login";
 
     // Common timeouts
     protected static final int CONNECTION_TIMEOUT = 30000; // 30 seconds
