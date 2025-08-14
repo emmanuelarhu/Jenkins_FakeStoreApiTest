@@ -198,7 +198,7 @@ public class UsersApiTest extends BaseTest {
                     .when()
                     .post(USERS_ENDPOINT)
                     .then()
-                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403), equalTo(200)))
+                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403)))
                     .log().all();
         } catch (Exception e) {
             handleApiException(e, "POST /users with invalid " + invalidField);
@@ -219,7 +219,7 @@ public class UsersApiTest extends BaseTest {
                     .when()
                     .post(USERS_ENDPOINT)
                     .then()
-                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403), equalTo(200)))
+                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403)))
                     .log().all();
         } catch (Exception e) {
             handleApiException(e, "POST /users with empty body");
