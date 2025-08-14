@@ -197,7 +197,7 @@ public class ProductsApiTest extends BaseTest {
                     .when()
                     .post(PRODUCTS_ENDPOINT)
                     .then()
-                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403), equalTo(200)))
+                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403)))
                     .log().all();
         } catch (Exception e) {
             handleApiException(e, "POST /products with invalid " + invalidField);
@@ -218,7 +218,7 @@ public class ProductsApiTest extends BaseTest {
                     .when()
                     .post(PRODUCTS_ENDPOINT)
                     .then()
-                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403), equalTo(200)))
+                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403)))
                     .log().all();
         } catch (Exception e) {
             handleApiException(e, "POST /products with empty body");
@@ -241,7 +241,7 @@ public class ProductsApiTest extends BaseTest {
                     .when()
                     .post(PRODUCTS_ENDPOINT)
                     .then()
-                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403), equalTo(200)))
+                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403)))
                     .log().all();
         } catch (Exception e) {
             handleApiException(e, "POST /products with negative price");
@@ -312,7 +312,7 @@ public class ProductsApiTest extends BaseTest {
                     .when()
                     .put(PRODUCTS_ENDPOINT + "/{id}")
                     .then()
-                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403), equalTo(200)))
+                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403)))
                     .log().all();
         } catch (Exception e) {
             handleApiException(e, "PUT /products/1 with invalid price");
@@ -422,7 +422,7 @@ public class ProductsApiTest extends BaseTest {
                     .when()
                     .post(PRODUCTS_ENDPOINT)
                     .then()
-                    .statusCode(anyOf(equalTo(400), equalTo(413), equalTo(422), equalTo(403), equalTo(200)))
+                    .statusCode(anyOf(equalTo(400), equalTo(401), equalTo(422), equalTo(403)))
                     .log().all();
         } catch (Exception e) {
             handleApiException(e, "POST /products with long title");
@@ -445,7 +445,7 @@ public class ProductsApiTest extends BaseTest {
                     .when()
                     .post(PRODUCTS_ENDPOINT)
                     .then()
-                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403), equalTo(200)))
+                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403)))
                     .log().all();
         } catch (Exception e) {
             handleApiException(e, "POST /products with invalid image URL");
