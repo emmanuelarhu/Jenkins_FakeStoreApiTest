@@ -60,7 +60,6 @@ pipeline {
 	post {
 		success {
 			slackSend(
-    channel: '#jenkins-alerts',
     color: 'good', // green
     message: """
 ✅ *BUILD SUCCESS*
@@ -109,7 +108,6 @@ emailext(
     }
     failure {
 			slackSend(
-    channel: '#jenkins-alerts',
     color: 'danger', // red
     message: """
 ❌ *BUILD FAILED*
@@ -158,7 +156,6 @@ emailext(
     }
     unstable {
 			slackSend(
-    channel: '#jenkins-alerts',
     color: 'warning', // yellow
     message: """
 ⚠️ *BUILD UNSTABLE*
