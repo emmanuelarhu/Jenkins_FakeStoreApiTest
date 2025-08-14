@@ -4,7 +4,6 @@ pipeline {
 	}
 
     tools {
-		// This must match the name you set in Global Tool Configuration
         allure 'Allure'
     }
 
@@ -37,7 +36,6 @@ pipeline {
                             echo "=== Allure Results Check ==="
                             ls -la target/allure-results/ || echo "No allure-results directory"
                             echo "Number of allure files: $(find target/allure-results -name '*.json' | wc -l)"
-                            echo "Allure tool available: $(which allure || echo 'Not in PATH')"
                         '''
                     }
                 }
@@ -64,25 +62,62 @@ pipeline {
 			slackSend(
             color: 'good',
             message: ":white_check_mark: *SUCCESS* - `${env.JOB_NAME} #${env.BUILD_NUMBER}`\n" +
-                     "See details: ${env.BUILD_URL}\n" +
-                     "Allure Report: ${env.BUILD_URL}allure"
+                     "All tests passed. See details: ${env.BUILD_URL}\n" +
+                     "See Allure Report Here 👉: ${env.BUILD_URL}allure"
         )
+        emailext(
+			subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+			body: """✅ Build succeeded!
+				<b>Build Details:</b>
+				<br>
+				<b>Job:</b> ${env.JOB_NAME}
+				<b>Build Number:</b> ${env.BUILD_NUMBER}
+                <b>Details:</b> ${env.BUILD_URL}
+                <b>Allure Report:</b> ${env.BUILD_URL}allure
+                """,
+                to: "notebooks8.8.8.8@gmail.com"
+            )
     }
     failure {
 			slackSend(
             color: 'danger',
             message: ":x: *FAILED* - `${env.JOB_NAME} #${env.BUILD_NUMBER}`\n" +
-                     "See details: ${env.BUILD_URL}\n" +
-                     "Please check logs immediately."
+                     "All test failed. See details: ${env.BUILD_URL}\n" +
+                     "Please check logs immediately.\n" +
+					 "See Allure Report Here 👉: ${env.BUILD_URL}allure"
         )
+        emailext(
+			subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+			body: """❌ Build failed!
+				<b>Build Details:</b>
+				<br>
+				<b>Job:</b> ${env.JOB_NAME}
+				<b>Build Number:</b> ${env.BUILD_NUMBER}
+				<b>Details:</b> ${env.BUILD_URL}
+				<b>Allure Report:</b> ${env.BUILD_URL}allure
+				""",
+				to: "notebooks8.8.8.8@gmail.com"
+			)
     }
     unstable {
 			slackSend(
             color: 'warning',
             message: ":warning: *UNSTABLE* - `${env.JOB_NAME} #${env.BUILD_NUMBER}`\n" +
-                     "Some tests failed. See: `${env.BUILD_URL}`\n" +
+                     "Some tests failed. See details: `${env.BUILD_URL}`\n" +
                      "See Allure Report Here 👉: ${env.BUILD_URL}allure"
         )
+        emailext(
+			subject: "UNSTABLE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+			body: """⚠️ Build unstable!
+				<b>Build Details:</b>
+				<br>
+				<b>Job:</b> ${env.JOB_NAME}
+				<b>Build Number:</b> ${env.BUILD_NUMBER}
+				<b>Details:</b> ${env.BUILD_URL}
+				<b>Allure Report:</b> ${env.BUILD_URL}allure
+				""",
+				to: "notebooks8.8.8.8@gmail.com"
+			)
     }
 }
 	}
