@@ -117,6 +117,7 @@ src/
 - Response time thresholds
 - Concurrent request handling
 
+
 ## 🏷️ Test Annotations
 
 Tests are organized using Allure annotations:
