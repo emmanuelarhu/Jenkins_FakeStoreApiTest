@@ -120,6 +120,7 @@ src/
 
 ## 🏷️ Test Annotations
 
+
 Tests are organized using Allure annotations:
 - `@Epic`: FakeStore API Testing
 - `@Feature`: Users Management
