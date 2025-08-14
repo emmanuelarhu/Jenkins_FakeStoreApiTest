@@ -197,7 +197,7 @@ public class CartsApiTest extends BaseTest {
                     .when()
                     .post(CARTS_ENDPOINT)
                     .then()
-                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403), equalTo(200)))
+                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403)))
                     .log().all();
         } catch (Exception e) {
             handleApiException(e, "POST /carts with invalid " + invalidField);
@@ -218,7 +218,7 @@ public class CartsApiTest extends BaseTest {
                     .when()
                     .post(CARTS_ENDPOINT)
                     .then()
-                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403), equalTo(200)))
+                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403)))
                     .log().all();
         } catch (Exception e) {
             handleApiException(e, "POST /carts with empty body");
@@ -241,7 +241,7 @@ public class CartsApiTest extends BaseTest {
                     .when()
                     .post(CARTS_ENDPOINT)
                     .then()
-                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403), equalTo(200)))
+                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403)))
                     .log().all();
         } catch (Exception e) {
             handleApiException(e, "POST /carts with invalid user ID");
@@ -426,7 +426,7 @@ public class CartsApiTest extends BaseTest {
                     .when()
                     .post(CARTS_ENDPOINT)
                     .then()
-                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403), equalTo(200)))
+                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403)))
                     .log().all();
         } catch (Exception e) {
             handleApiException(e, "POST /carts with negative quantities");
@@ -472,7 +472,7 @@ public class CartsApiTest extends BaseTest {
                     .when()
                     .post(CARTS_ENDPOINT)
                     .then()
-                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403), equalTo(200)))
+                    .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(403)))
                     .log().all();
         } catch (Exception e) {
             handleApiException(e, "POST /carts with empty products");
