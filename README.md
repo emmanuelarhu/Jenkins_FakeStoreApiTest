@@ -1,210 +1,255 @@
-# FakeStore API - Users Testing Framework
+# FakeStore API Test Automation with Jenkins CI/CD
 
-A comprehensive API testing framework for the FakeStore API Users endpoints using REST Assured, TestNG, and Allure reporting.
+A complete automation testing project demonstrating CI/CD integration using Jenkins, REST Assured, and GitHub Pages for report hosting.
 
-## 🚀 Features
- 
-- **Complete CRUD Testing**: Tests for GET, POST, PUT, DELETE operations
-- **Comprehensive Coverage**: Positive, negative, and edge test cases
-- **Security Testing**: SQL injection and XSS protection validation
-- **Performance Testing**: Response time and concurrent request handling
-- **Data Validation**: Email format and input validation tests
-- **Beautiful Reports**: Allure reporting with detailed test documentation
-- **Parameterized Tests**: Data-driven testing using TestNG DataProviders
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-automated-blue)
+![Reports](https://img.shields.io/badge/reports-allure-orange)
 
-## 📋 Prerequisites
+## 📋 Project Overview
 
-- Java 21 or higher
-- Maven 3.6 or higher
-- Internet connection (for API calls)
+This project showcases automated API testing for the [FakeStore API](https://fakestoreapi.com/) with a complete CI/CD pipeline using Jenkins. Tests run automatically on code commits and generate beautiful reports hosted on GitHub Pages.
 
-## 🛠️ Setup
+##  Objectives Achieved
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/emmanuelarhu/FakeStoreApiTest.git
-   cd FakeStoreApiTest
-   ```
+✅ **CI/CD Integration** - Automated test execution on code changes  
+✅ **Jenkins Pipeline** - Declarative pipeline with Docker agent  
+✅ **API Testing** - REST Assured framework for comprehensive API tests  
+✅ **Report Generation** - Allure reports with GitHub Pages hosting  
+✅ **Notifications** - Slack and email alerts for build status  
+✅ **Webhooks** - Automatic triggering on GitHub push events
 
-2. **Install dependencies**
-   ```bash
-   mvn clean install
-   ```
+## 🛠️ Technologies Used
 
-## 🧪 Running Tests
-
-### Run All Tests
-```bash
-mvn clean test
-```
-
-### Run Specific Test Suite
-```bash
-# Smoke tests only
-mvn test -DtestSuite=Smoke-Tests
-
-# Regression tests
-mvn test -DtestSuite=Regression-Tests
-```
-
-### Run with TestNG XML
-```bash
-mvn test -DsuiteXmlFile=testng.xml
-```
-
-## 📊 Generating Reports
-
-### Allure Reports
-```bash
-# Generate and serve Allure report
-mvn allure:serve
-
-# Generate Allure report only
-mvn allure:report
-```
-
-The Allure report will be available at `target/site/allure-maven-plugin/index.html`
+- **Testing Framework**: REST Assured + TestNG
+- **Build Tool**: Maven
+- **CI/CD**: Jenkins with Docker
+- **Reports**: Allure Framework
+- **Hosting**: GitHub Pages
+- **Notifications**: Slack + Email
+- **Version Control**: Git + GitHub
 
 ## 📁 Project Structure
 
 ```
-src/
-├── test/
-│   └── java/
-│       └── com/
-│           └── emmanuelarhu/
-│               ├── base/
-│               │   └── BaseTest.java          # Base test configuration
-│               ├── models/
-│               │   └── User.java              # User model/POJO
-│               ├── tests/
-│               │   └── UsersApiTest.java      # Main test class
-│               └── utils/
-│                   └── TestDataProvider.java # Test data provider
-├── testng.xml                                 # TestNG configuration
-└── pom.xml                                   # Maven configuration
-``` 
-
-## 🎯 Test Coverage
-
-### API Endpoints Tested
-- `GET /users` - Retrieve all users
-- `GET /users/{id}` - Retrieve specific user
-- `POST /users` - Create new user
-- `PUT /users/{id}` - Update existing user
-- `DELETE /users/{id}` - Delete user
-
-### Test Categories
-
-#### ✅ Positive Tests
-- Valid user creation with proper data
-- Successful retrieval of existing users
-- Proper user updates and deletions
-- Response time validation
-
-#### ❌ Negative Tests
-- Invalid user IDs (negative, non-existent, non-numeric)
-- Invalid user data (missing fields, invalid email formats)
-- Malformed JSON requests
-- Empty request bodies
-
-#### 🔒 Security Tests
-- SQL injection protection
-- XSS (Cross-Site Scripting) protection
-- Input sanitization validation
-
-#### ⚡ Performance Tests
-- Response time thresholds
-- Concurrent request handling
-
-
-## 🏷️ Test Annotations
-
-
-Tests are organized using Allure annotations:
-- `@Epic`: FakeStore API Testing
-- `@Feature`: Users Management
-- `@Story`: Specific functionality (Get Users, Create User, etc.)
-- `@Severity`: Test importance level
-
-## 📈 Test Execution Priority
-
-Tests are executed in priority order:
-1. **Priority 1-6**: GET operations and basic validations
-2. **Priority 7-10**: POST operations and user creation
-3. **Priority 11-14**: PUT operations and user updates
-4. **Priority 15-18**: DELETE operations
-5. **Priority 19-22**: Security and edge case tests
-
-## 🔧 Configuration
-
-### Base URL
-The base URL is configured in `BaseTest.java`:
-```java
-protected static final String BASE_URL = "https://fakestoreapi.com";
+├── src/
+│   └── test/
+│       └── java/
+│           └── com/
+│               └── emmanuelarhu/
+│                   ├── base/
+│                   │   └── BaseTest.java
+│                   ├── models/
+│                   │   ├── Cart.java
+│                   │   ├── CartItem.java
+│                   │   ├── LoginRequest.java
+│                   │   ├── Product.java
+│                   │   └── User.java
+│                   ├── tests/
+│                   │   ├── AuthApiTest.java
+│                   │   ├── CartsApiTest.java
+│                   │   ├── ConnectivityTest.java
+│                   │   ├── ProductsApiTest.java
+│                   │   └── UsersApiTest.java
+│                   └── utils/
+│                       ├── AuthTestDataProvider.java
+│                       ├── CartTestDataProvider.java
+│                       ├── ProductTestDataProvider.java
+│                       └── TestDataProvider.java
+├── target/
+│   ├── allure-results/
+│   └── surefire-reports/
+├── Dockerfile
+├── Jenkinsfile
+├── pom.xml
+├── testng.xml
+└── README.md
 ```
 
-### Request Specifications
-- All requests include Allure reporting filters
-- JSON content-type headers for POST/PUT operations
-- Automatic request/response logging on failures
+## Quick Start
 
-## 📝 Test Data
+### Prerequisites
+- Java 17+
+- Maven 3.8+
+- Docker (optional)
+- Jenkins (local or Docker)
 
-Test data is managed through `TestDataProvider.java`:
-- Valid user data for creation tests
-- Invalid data for negative testing
-- User IDs for parameterized testing
-- Update scenarios for modification tests
+### Local Testing
+```bash
+# Clone the repository
+git clone https://github.com/emmanuelarhu/Jenkins_FakeStoreApiTest.git
+cd Jenkins_FakeStoreApiTest
 
-## 🚨 Error Handling
+# Run tests
+mvn clean test
 
-The framework handles various error scenarios:
-- Network timeouts and connectivity issues
-- Invalid JSON responses
-- HTTP error codes (400, 404, 422, etc.)
-- Assertion failures with detailed reporting
+# View results
+open target/surefire-reports/index.html
+```
+
+### Docker Testing
+```bash
+# Build and run in Docker
+docker build -t fakestore-tests .
+docker run fakestore-tests
+```
+
+## 🔧 Jenkins Setup
+
+### 1. Install Required Plugins
+- Git Plugin
+- Pipeline Plugin
+- HTML Publisher Plugin
+- Allure Plugin
+- Slack Notification Plugin
+- Email Extension Plugin
+
+### 2. Configure Jenkins Job
+1. Create new **Pipeline** job
+2. Set **SCM** to this GitHub repository
+3. Configure **Webhooks** for automatic triggering
+4. Set **Jenkinsfile** path: `Jenkinsfile`
+
+### 3. Environment Variables
+Configure these in Jenkins:
+- `SLACK_CHANNEL`: Your Slack channel (e.g., `#testing`)
+- `EMAIL_TO`: Your email address
+- GitHub credentials for Pages deployment
+
+![img_1.png](img_1.png)
+
+## 📊 Test Reports
+
+### Live Reports
+🌐 **GitHub Pages**: [Click me  to open 👉 Allure Report](https://emmanuelarhu.github.io/Jenkins_FakeStoreApiTest/allure-report/)
+
+![img.png](img.png)
+
+### Report Features
+- **Test Execution Summary** - Pass/fail statistics
+- **Test Details** - Individual test results and timings
+- **API Response Data** - Request/response information
+- **Trend Analysis** - Historical test data
+- **Mobile Friendly** - Responsive design for all devices
+
+## 🧪 Test Suite
+
+The project includes comprehensive API testing for FakeStore API with organized test classes:
+
+### Test Classes Overview
+
+| Test Class | Purpose | Coverage |
+|------------|---------|----------|
+| **BaseTest** |  Test foundation | Common setup, configurations |
+| **ConnectivityTest** |  API connectivity | Basic endpoint availability |
+| **ProductsApiTest** |  Product operations | CRUD operations, search, categories |
+| **CartsApiTest** |  Shopping cart | Cart management, items |
+| **UsersApiTest** |  User management | User CRUD, authentication |
+| **AuthApiTest** |  Authentication | Login, tokens, security |
+
+### Test Data Management
+
+| Component | Description |
+|-----------|-------------|
+| **TestDataProvider** |  Base data provider for all tests |
+| **ProductTestDataProvider** |  Product-specific test data |
+| **CartTestDataProvider** |  Cart and item test data |
+| **AuthTestDataProvider** |  Authentication test data |
+
+### Model Classes
+
+| Model | Purpose |
+|-------|---------|
+| **Product** |  Product entity representation |
+| **Cart** |  Shopping cart model |
+| **CartItem** |  Individual cart items |
+| **User** |  User profile model |
+| **LoginRequest** |  Authentication request model |
+
+### Test Scenarios
+- ✅ **API Connectivity** - Basic endpoint availability testing
+- ✅ **Product Management** - Complete CRUD operations for products
+- ✅ **Shopping Cart Operations** - Cart creation, item management, checkout
+- ✅ **User Management** - User registration, profile management, authentication
+- ✅ **Authentication & Security** - Login flows, token validation, access control
+- ✅ **Response Validation** - JSON schema validation and data integrity
+- ✅ **Error Handling** - Invalid requests and edge cases
+- ✅ **Performance Testing** - Response time validation across all endpoints
+
+
+## 🔔 Notifications
+
+### Slack Integration
+- ✅ Build success/failure alerts
+- ✅ Test execution summaries
+- ✅ Direct links to reports and logs
+
+### Email Notifications
+- ✅ HTML formatted emails
+- ✅ Build status and statistics
+- ✅ Quick access links to reports
+
+## 🐳 Docker Support
+
+The project includes Docker support for consistent testing environments:
+
+```dockerfile
+FROM maven:3.8.1-openjdk-17-slim
+WORKDIR /FakeStoreApiTest
+COPY . .
+RUN mvn dependency:go-offline
+CMD ["mvn", "clean", "test"]
+```
+
+## 📈 CI/CD Pipeline
+
+### Pipeline Stages
+1. **Checkout** - Pull latest code from GitHub
+2. **Setup** - Install dependencies and tools
+3. **Test** - Execute API test suite
+4. **Report** - Generate Allure HTML reports
+5. **Deploy** - Push reports to GitHub Pages
+6. **Notify** - Send status notifications
+
+### Triggering
+- **Automatic**: GitHub webhook on push to `main` branch
+- **Manual**: Jenkins "Build Now" button
+- **Scheduled**: Can be configured for nightly runs
+
+## Project Benefits
+
+- **Quality Assurance** - Automated testing catches issues early
+- **Rapid Feedback** - Instant notifications on build status
+- **Professional Reports** - Stakeholder-friendly test results
+- **Scalable Architecture** - Easy to add more tests and endpoints
+- **Best Practices** - Follows industry CI/CD standards
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Add tests following the existing patterns
-4. Ensure all tests pass
-5. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/new-test`)
+3. Commit changes (`git commit -m 'Add new API test'`)
+4. Push to branch (`git push origin feature/new-test`)
+5. Open a Pull Request
 
-## 📚 Dependencies
+## 📝 License
 
-- **REST Assured**: API testing framework
-- **TestNG**: Test execution and organization
-- **Allure**: Test reporting and documentation
-- **Jackson**: JSON processing
-- **SLF4J**: Logging framework
-- **AspectJ**: AOP support for Allure
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🐛 Troubleshooting
+## 👨‍💻 Author
 
-### Common Issues
+**Emmanuel Arhu**
+- 🌐 Website: [emmanuelarhu.link](https://emmanuelarhu.link)
+- 💼 LinkedIn: [linkedin.com/in/emmanuelarhu](https://www.linkedin.com/in/emmanuelarhu)
+-  📧 Email: [emmanuelarhu706@gmail.com](mailto:emmanuelarhu706@gmail.com)
 
-1. **Tests failing due to network issues**
-    - Check internet connectivity
-    - Verify FakeStore API is accessible
+## 🙏 Acknowledgments
 
-2. **Allure reports not generating**
-    - Ensure AspectJ weaver is properly configured
-    - Check Maven Surefire plugin configuration
-
-3. **TestNG tests not discovered**
-    - Verify test class naming conventions (*Test.java)
-    - Check TestNG dependencies in pom.xml
-
-## 📞 Support
-
-For questions or issues, please contact:
-- **Author**: Emmanuel Arhu
-- **GitHub**: [github.com/emmanuelarhu](https://github.com/emmanuelarhu)
-- **LinkedIn**: [linkedin.com/in/emmanuelarhu](https://www.linkedin.com/in/emmanuelarhu)
+- [FakeStore API](https://fakestoreapi.com/) for providing the test API
+- [Allure Framework](https://docs.qameta.io/allure/) for beautiful reporting
+- [REST Assured](https://rest-assured.io/) for API testing capabilities
+- [Jenkins](https://www.jenkins.io/) for CI/CD automation
 
 ---
 
-**Happy Testing! 🎉**
+⭐ **Star this repository if it helped you learn CI/CD with Jenkins!** ⭐
