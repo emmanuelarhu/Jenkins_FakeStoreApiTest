@@ -1,0 +1,57 @@
+<div>PUT to https://fakestoreapi.com/carts/3</div>
+
+<h4>Body</h4>
+<div>
+    <pre class="preformated-text">
+{
+    &quot;id&quot;: 3,
+    &quot;userId&quot;: 3,
+    &quot;products&quot;: [
+        {
+            &quot;productId&quot;: 1,
+            &quot;quantity&quot;: 3
+        },
+        {
+            &quot;productId&quot;: 2,
+            &quot;quantity&quot;: 3
+        },
+        {
+            &quot;productId&quot;: 5,
+            &quot;quantity&quot;: 1
+        }
+    ],
+    &quot;date&quot;: &quot;2024-02-03&quot;
+}    </pre>
+</div>
+
+<h4>Headers</h4>
+<div>
+        <div>Accept: application/json</div>
+        <div>User-Agent: FakeStore-API-Test-Suite/1.0</div>
+        <div>Content-Type: application/json</div>
+</div>
+
+
+
+<h4>Curl</h4>
+<div>
+curl -v -X PUT &#39;https://fakestoreapi.com/carts/3&#39; -H &#39;Accept: application/json&#39; -H &#39;User-Agent: FakeStore-API-Test-Suite/1.0&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;id&quot;: 3,
+    &quot;userId&quot;: 3,
+    &quot;products&quot;: [
+        {
+            &quot;productId&quot;: 1,
+            &quot;quantity&quot;: 3
+        },
+        {
+            &quot;productId&quot;: 2,
+            &quot;quantity&quot;: 3
+        },
+        {
+            &quot;productId&quot;: 5,
+            &quot;quantity&quot;: 1
+        }
+    ],
+    &quot;date&quot;: &quot;2024-02-03&quot;
+}&#39;
+</div>

@@ -1,0 +1,15 @@
+/home/jenkins/workspace/FakeStoreAPI-Tests/src/test/java/com/emmanuelarhu/models/CartItem.java
+/home/jenkins/workspace/FakeStoreAPI-Tests/src/test/java/com/emmanuelarhu/tests/ProductsApiTest.java
+/home/jenkins/workspace/FakeStoreAPI-Tests/src/test/java/com/emmanuelarhu/utils/AuthTestDataProvider.java
+/home/jenkins/workspace/FakeStoreAPI-Tests/src/test/java/com/emmanuelarhu/base/BaseTest.java
+/home/jenkins/workspace/FakeStoreAPI-Tests/src/test/java/com/emmanuelarhu/models/LoginRequest.java
+/home/jenkins/workspace/FakeStoreAPI-Tests/src/test/java/com/emmanuelarhu/tests/CartsApiTest.java
+/home/jenkins/workspace/FakeStoreAPI-Tests/src/test/java/com/emmanuelarhu/tests/AuthApiTest.java
+/home/jenkins/workspace/FakeStoreAPI-Tests/src/test/java/com/emmanuelarhu/utils/TestDataProvider.java
+/home/jenkins/workspace/FakeStoreAPI-Tests/src/test/java/com/emmanuelarhu/models/Cart.java
+/home/jenkins/workspace/FakeStoreAPI-Tests/src/test/java/com/emmanuelarhu/models/User.java
+/home/jenkins/workspace/FakeStoreAPI-Tests/src/test/java/com/emmanuelarhu/utils/ProductTestDataProvider.java
+/home/jenkins/workspace/FakeStoreAPI-Tests/src/test/java/com/emmanuelarhu/utils/CartTestDataProvider.java
+/home/jenkins/workspace/FakeStoreAPI-Tests/src/test/java/com/emmanuelarhu/tests/UsersApiTest.java
+/home/jenkins/workspace/FakeStoreAPI-Tests/src/test/java/com/emmanuelarhu/models/Product.java
+/home/jenkins/workspace/FakeStoreAPI-Tests/src/test/java/com/emmanuelarhu/tests/ConnectivityTest.java

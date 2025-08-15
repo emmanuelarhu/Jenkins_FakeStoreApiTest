@@ -1,0 +1,15 @@
+com/emmanuelarhu/models/LoginRequest.class
+com/emmanuelarhu/base/BaseTest.class
+com/emmanuelarhu/models/User.class
+com/emmanuelarhu/models/CartItem.class
+com/emmanuelarhu/tests/AuthApiTest.class
+com/emmanuelarhu/utils/AuthTestDataProvider.class
+com/emmanuelarhu/utils/CartTestDataProvider.class
+com/emmanuelarhu/tests/UsersApiTest.class
+com/emmanuelarhu/utils/ProductTestDataProvider.class
+com/emmanuelarhu/models/Cart.class
+com/emmanuelarhu/utils/TestDataProvider.class
+com/emmanuelarhu/models/Product.class
+com/emmanuelarhu/tests/CartsApiTest.class
+com/emmanuelarhu/tests/ConnectivityTest.class
+com/emmanuelarhu/tests/ProductsApiTest.class

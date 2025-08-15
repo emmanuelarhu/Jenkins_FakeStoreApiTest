@@ -1,0 +1,516 @@
+<table border='1'>
+<tr>
+<th>Class name</th>
+<th>Method name</th>
+<th>Groups</th>
+</tr><tr>
+<td>com.emmanuelarhu.tests.ConnectivityTest</td>
+<td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr>
+<td align='center' colspan='3'>@Test</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>validateAllureIntegration</td>
+<td>connectivity smoke </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>validateTestEnvironment</td>
+<td>connectivity smoke </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>validateTestFramework</td>
+<td>connectivity smoke </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>validateApiConnectivity</td>
+<td>connectivity smoke </td>
+</tr>
+<tr>
+<td align='center' colspan='3'>@BeforeClass</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>setUp</td>
+<td>&nbsp;</td></tr>
+<tr>
+<td align='center' colspan='3'>@BeforeMethod</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>beforeMethod</td>
+<td>&nbsp;</td></tr>
+<tr>
+<td align='center' colspan='3'>@AfterMethod</td>
+</tr>
+<tr>
+<td align='center' colspan='3'>@AfterClass</td>
+</tr>
+<tr>
+<td>com.emmanuelarhu.tests.AuthApiTest</td>
+<td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr>
+<td align='center' colspan='3'>@Test</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testLoginWithNullValues</td>
+<td>negative auth </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testLoginWithSpecialCharacters</td>
+<td>negative auth </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testLoginWithLongPassword</td>
+<td>negative auth </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testSqlInjectionInLogin</td>
+<td>security auth </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testLoginWithMissingPassword</td>
+<td>negative auth </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testLoginWithValidCredentials</td>
+<td>auth smoke </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testXssProtectionInLogin</td>
+<td>security auth </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testLoginWithMalformedJson</td>
+<td>negative auth </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testLoginWithInvalidCredentials</td>
+<td>negative auth </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testLoginWithMissingUsername</td>
+<td>negative auth </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testLoginWithLongUsername</td>
+<td>negative auth </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testLoginWithEmptyBody</td>
+<td>negative auth </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testLoginResponseTime</td>
+<td>negative auth </td>
+</tr>
+<tr>
+<td align='center' colspan='3'>@BeforeClass</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>setUp</td>
+<td>&nbsp;</td></tr>
+<tr>
+<td align='center' colspan='3'>@BeforeMethod</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>beforeMethod</td>
+<td>&nbsp;</td></tr>
+<tr>
+<td align='center' colspan='3'>@AfterMethod</td>
+</tr>
+<tr>
+<td align='center' colspan='3'>@AfterClass</td>
+</tr>
+<tr>
+<td>com.emmanuelarhu.tests.CartsApiTest</td>
+<td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr>
+<td align='center' colspan='3'>@Test</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testCreateCartWithInvalidData</td>
+<td>negative post </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetSingleCartBySpecialCharacterId</td>
+<td>negative get </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testDeleteCartWithInvalidId</td>
+<td>negative delete </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testUpdateCartWithValidData</td>
+<td>smoke put </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testCreateCartWithInvalidUserId</td>
+<td>negative post </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetSingleCartByValidId</td>
+<td>get smoke </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testCreateCartWithNegativeQuantities</td>
+<td>negative edge </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testDeleteNonExistentCart</td>
+<td>negative delete </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testUpdateNonExistentCart</td>
+<td>negative put </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetSingleCartByInvalidId</td>
+<td>negative get </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testCreateCartWithValidData</td>
+<td>post smoke </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testSqlInjectionProtection</td>
+<td>security </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetAllCarts</td>
+<td>get smoke </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetAllCartsResponseTime</td>
+<td>get smoke </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetCartWithFloatId</td>
+<td>negative edge </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testUpdateCartWithInvalidId</td>
+<td>negative put </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetSingleCartByNonNumericId</td>
+<td>negative get </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testDeleteExistingCart</td>
+<td>smoke delete </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testCreateCartWithEmptyProducts</td>
+<td>negative edge </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testCreateCartWithEmptyBody</td>
+<td>negative post </td>
+</tr>
+<tr>
+<td align='center' colspan='3'>@BeforeClass</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>setUp</td>
+<td>&nbsp;</td></tr>
+<tr>
+<td align='center' colspan='3'>@BeforeMethod</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>beforeMethod</td>
+<td>&nbsp;</td></tr>
+<tr>
+<td align='center' colspan='3'>@AfterMethod</td>
+</tr>
+<tr>
+<td align='center' colspan='3'>@AfterClass</td>
+</tr>
+<tr>
+<td>com.emmanuelarhu.tests.ProductsApiTest</td>
+<td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr>
+<td align='center' colspan='3'>@Test</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testCreateProductWithInvalidData</td>
+<td>negative post </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testUpdateNonExistentProduct</td>
+<td>negative put </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetSingleProductBySpecialCharacterId</td>
+<td>negative get </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testCreateProductWithValidData</td>
+<td>post smoke </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testCreateProductWithInvalidImageUrl</td>
+<td>negative edge </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetSingleProductByValidId</td>
+<td>get smoke </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testDeleteProductWithInvalidId</td>
+<td>negative delete </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testDeleteNonExistentProduct</td>
+<td>negative delete </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testSqlInjectionProtection</td>
+<td>security </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testCreateProductWithLongTitle</td>
+<td>negative edge </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testUpdateProductWithInvalidPrice</td>
+<td>negative put </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testUpdateProductWithValidData</td>
+<td>smoke put </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testCreateProductWithNegativePrice</td>
+<td>negative post </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetAllProductsResponseTime</td>
+<td>get smoke </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetProductWithFloatId</td>
+<td>negative edge </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetSingleProductByInvalidId</td>
+<td>negative get </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetAllProducts</td>
+<td>get smoke </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testDeleteExistingProduct</td>
+<td>smoke delete </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testCreateProductWithEmptyBody</td>
+<td>negative post </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetSingleProductByNonNumericId</td>
+<td>negative get </td>
+</tr>
+<tr>
+<td align='center' colspan='3'>@BeforeClass</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>setUp</td>
+<td>&nbsp;</td></tr>
+<tr>
+<td align='center' colspan='3'>@BeforeMethod</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>beforeMethod</td>
+<td>&nbsp;</td></tr>
+<tr>
+<td align='center' colspan='3'>@AfterMethod</td>
+</tr>
+<tr>
+<td align='center' colspan='3'>@AfterClass</td>
+</tr>
+<tr>
+<td>com.emmanuelarhu.tests.UsersApiTest</td>
+<td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr>
+<td align='center' colspan='3'>@Test</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testUpdateNonExistentUser</td>
+<td>negative put </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testCreateUserWithMalformedJson</td>
+<td>negative post </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testCreateUserWithInvalidData</td>
+<td>negative post </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetAllUsers</td>
+<td>get smoke </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testDeleteExistingUser</td>
+<td>smoke delete </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testCreateUserWithEmptyBody</td>
+<td>negative post </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetSingleUserByValidId</td>
+<td>get smoke </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetSingleUserBySpecialCharacterId</td>
+<td>negative get </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testSqlInjectionProtection</td>
+<td>security </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testDeleteUserWithNegativeId</td>
+<td>negative delete </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testUpdateUserWithValidData</td>
+<td>smoke put </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetSingleUserByNonNumericId</td>
+<td>negative get </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetAllUsersResponseTime</td>
+<td>get smoke </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testDeleteUserWithInvalidId</td>
+<td>negative delete </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testPartialUpdateUser</td>
+<td>put </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testGetSingleUserByInvalidId</td>
+<td>negative get </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testDeleteNonExistentUser</td>
+<td>negative delete </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testCreateUserWithValidData</td>
+<td>post smoke </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>testUpdateUserWithInvalidId</td>
+<td>negative put </td>
+</tr>
+<tr>
+<td align='center' colspan='3'>@BeforeClass</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>setUp</td>
+<td>&nbsp;</td></tr>
+<tr>
+<td align='center' colspan='3'>@BeforeMethod</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>beforeMethod</td>
+<td>&nbsp;</td></tr>
+<tr>
+<td align='center' colspan='3'>@AfterMethod</td>
+</tr>
+<tr>
+<td align='center' colspan='3'>@AfterClass</td>
+</tr>
+</table>

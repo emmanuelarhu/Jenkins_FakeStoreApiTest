@@ -1,0 +1,49 @@
+<div>POST to https://fakestoreapi.com/carts</div>
+
+<h4>Body</h4>
+<div>
+    <pre class="preformated-text">
+{
+    &quot;id&quot;: null,
+    &quot;userId&quot;: 1,
+    &quot;products&quot;: [
+        {
+            &quot;productId&quot;: 1,
+            &quot;quantity&quot;: 2
+        },
+        {
+            &quot;productId&quot;: 2,
+            &quot;quantity&quot;: 1
+        }
+    ],
+    &quot;date&quot;: &quot;2024-01-01&quot;
+}    </pre>
+</div>
+
+<h4>Headers</h4>
+<div>
+        <div>Accept: application/json</div>
+        <div>User-Agent: FakeStore-API-Test-Suite/1.0</div>
+        <div>Content-Type: application/json</div>
+</div>
+
+
+
+<h4>Curl</h4>
+<div>
+curl -v -X POST &#39;https://fakestoreapi.com/carts&#39; -H &#39;Accept: application/json&#39; -H &#39;User-Agent: FakeStore-API-Test-Suite/1.0&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;id&quot;: null,
+    &quot;userId&quot;: 1,
+    &quot;products&quot;: [
+        {
+            &quot;productId&quot;: 1,
+            &quot;quantity&quot;: 2
+        },
+        {
+            &quot;productId&quot;: 2,
+            &quot;quantity&quot;: 1
+        }
+    ],
+    &quot;date&quot;: &quot;2024-01-01&quot;
+}&#39;
+</div>
