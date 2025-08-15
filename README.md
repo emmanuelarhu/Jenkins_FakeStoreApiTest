@@ -83,7 +83,7 @@ src/
 │                   └── TestDataProvider.java # Test data provider
 ├── testng.xml                                 # TestNG configuration
 └── pom.xml                                   # Maven configuration
-```
+``` 
 
 ## 🎯 Test Coverage
 
